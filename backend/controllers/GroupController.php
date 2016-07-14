@@ -2,26 +2,28 @@
 
 namespace backend\controllers;
 
+use wanhunet\wanhunet;
 use Yii;
-use common\models\user\User;
-use common\models\user\UserSearch;
+use common\models\group\Group;
+use common\models\group\GroupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use wanhunet\wanhunet;
 
 /**
- * UsersController implements the CRUD actions for User model.
+ * GroupController implements the CRUD actions for Group model.
  */
-class UsersController extends BackendController
+class GroupController extends BackendController
 {
+
+
     /**
-     * Lists all User models.
+     * Lists all Group models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new GroupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -31,7 +33,7 @@ class UsersController extends BackendController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Group model.
      * @param integer $id
      * @return mixed
      */
@@ -43,19 +45,15 @@ class UsersController extends BackendController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Group model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Group();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            User::updateAll(['groupid' => Yii::$app->request->post()['User']['groupid']], ['id' => $model->id]);
-            foreach(Yii::$app->request->post()['User']['role'] as $val){
-                Yii::$app->authManager->assign(Yii::$app->authManager->getRole($val), $model->id);
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -65,7 +63,7 @@ class UsersController extends BackendController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Group model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -73,40 +71,14 @@ class UsersController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if($id == 1) {
-            Yii::$app->session->setFlash('success', Yii::t('app', '没有权限'));
-            return $this->redirect(['index']);
-        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            User::updateAll(['groupid' => Yii::$app->request->post()['User']['groupid']], ['id' => $model->id]);
-            Yii::$app->authManager->revokeAll($id);
-            foreach (Yii::$app->request->post()['User']['role'] as $val) {
-                Yii::$app->authManager->assign(Yii::$app->authManager->getRole($val), $id);
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
-    }
-
-    /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        if($id==1){
-            $this->redirect(['index']);
-            Yii::$app->getSession()->setFlash('warning', '没有权限');
-            return false;
-        }
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
     /**
      * 启用按钮
@@ -119,8 +91,12 @@ class UsersController extends BackendController
             $ids = wanhunet::$app->request->post()["checkboxid"];
             $ids = explode(',',$ids);
             foreach($ids as $id){
-                $model = User::findOne(['id' => $id]);
-                User::updateAll(['status'=>User::STATUS_ACTIVE],['id' =>$model->id]);
+                $model = Group::findOne(['id' => $id]);
+
+                if($model->display== Group::DISPLAY_DELETED){
+                    $model->display=Group::DISPLAY_ACTIVE;
+                    $model->save();
+                }
             }
             return true;
         }
@@ -133,16 +109,16 @@ class UsersController extends BackendController
      */
     public function actionStop()
     {
-
         if(isset(wanhunet::$app->request->post()["checkboxid"])){
             $ids = wanhunet::$app->request->post()["checkboxid"];
             $ids = explode(',',$ids);
             foreach($ids as $id){
-                if(in_array(1,$ids)){
-                    return false;
+                $model = Group::findOne(['id' => $id]);
+
+                if($model->display== Group::DISPLAY_ACTIVE){
+                    $model->display=Group::DISPLAY_DELETED;
+                    $model->save();
                 }
-                $model = User::findOne(['id' => $id]);
-                User::updateAll(['status'=>User::STATUS_DELETED],['id' =>$model->id]);
             }
             return true;
         }
@@ -157,27 +133,39 @@ class UsersController extends BackendController
         if(isset(wanhunet::$app->request->post()["checkboxid"])){
             $ids = wanhunet::$app->request->post()["checkboxid"];
             $ids = explode(',',$ids);
-            if(in_array(1,$ids)){
-                return false;
-            }
             foreach($ids as $id){
-                $model = User::findOne(['id' => $id]);
-                $this->findModel($id)->delete();
+                $model = Group::findOne(['id' => $id]);
 
+                if($model->status== Group::STATUS_ACTIVE){
+                    $model->status=Group::STATUS_DELETED;
+                    $model->save();
+                }
             }
             return true;
         }
     }
     /**
-     * Finds the User model based on its primary key value.
+     * Deletes an existing Group model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Group model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Group the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Group::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

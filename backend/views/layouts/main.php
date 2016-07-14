@@ -34,7 +34,9 @@ if (Yii::$app->controller->action->id === 'login') {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
+  
         <?php $this->head() ?>
+
         <link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>css/base.css" type="text/css">
         <?php if (isset($this->blocks['inline_scripts'])): ?>
         <?= $this->blocks['inline_scripts'] ?>
@@ -65,6 +67,9 @@ if (Yii::$app->controller->action->id === 'login') {
     <?php $this->endBody() ?>
 
     </body>
+    <?php if (isset($this->blocks['footer_scripts'])): ?>
+        <?= $this->blocks['footer_scripts'] ?>
+    <?php endif; ?>
     </html>
     <?php $this->endPage() ?>
 <?php } ?>

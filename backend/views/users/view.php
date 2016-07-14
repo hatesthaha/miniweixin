@@ -36,6 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'password_reset_token',
             'email:email',
             [
+                'attribute' => 'groupid',
+                'value' => $model->groupLabel,
+            ],
+            [
                 'attribute' => 'status',
                 'value' => $model->statusLabel,
             ],

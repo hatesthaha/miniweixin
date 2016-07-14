@@ -11,11 +11,8 @@ use common\models\auth\Auth;
 
 
 ?>
-<link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>ztree/css/demo.css" type="text/css">
-<link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-<script src="<?= Yii::getAlias('@web') . '/' ?>js/jquery.min.js"></script>
-<script src="<?= Yii::getAlias('@web') . '/' ?>ztree/js/jquery.ztree.core-3.5.js"></script>
-<script src="<?= Yii::getAlias('@web') . '/' ?>ztree/js/jquery.ztree.excheck-3.5.js"></script>
+
+
 <div class="row">
     <?php
     $form = ActiveForm::begin([
@@ -53,7 +50,7 @@ use common\models\auth\Auth;
 
                 <div class="zTreeDemoBackground left">
 
-                    <ul id="newtree" class="ztree" style="width:400px;"></ul>
+                    <ul id="roletree" class="ztree" style="width:400px;"></ul>
                 </div>
             </div>
         </div>
@@ -63,7 +60,8 @@ use common\models\auth\Auth;
     <?php ActiveForm::end(); ?>
 
 </div>
-<script type="text/javascript">
+<?php $this->beginBlock('footer_scripts'); ?>
+<script>
 
     var setting = {
 
@@ -79,8 +77,8 @@ use common\models\auth\Auth;
     var zNodes =<?= json_encode($permissions) ?>;
 
 
-        $.fn.zTree.init($("#newtree"), setting, zNodes);
-        var treeObj = $.fn.zTree.getZTreeObj("newtree");
+        $.fn.zTree.init($("#roletree"), setting, zNodes);
+        var treeObj = $.fn.zTree.getZTreeObj("roletree");
     <?php if(!$model->isNewRecord){ ?>
         treeObj.expandAll(true);
     <?php }?>
@@ -95,7 +93,8 @@ use common\models\auth\Auth;
 
 
         $('#cebutton').click(function(){
-            var treeObj = $.fn.zTree.getZTreeObj("newtree");
+            var treeObj = $.fn.zTree.getZTreeObj("roletree");
+
             var nodes = treeObj.getCheckedNodes(true);
             var role = new Array();
             $.each(nodes,function(n,value) {
@@ -116,6 +115,6 @@ use common\models\auth\Auth;
         })
 
 
-
 </script>
+<?php $this->endBlock(); ?>
 

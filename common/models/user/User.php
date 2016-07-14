@@ -6,7 +6,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
+use common\models\group\Group;
+use yii\helpers\ArrayHelper;
 /**
  * User model
  *
@@ -28,6 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     private $_statusLabel;
     public $password;
     public $repassword;
+    private $_groupLabel;
     /**
      * @inheritdoc
      */
@@ -59,6 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'groupid' => Yii::t('app', 'Group'),
 
         ];
     }
@@ -120,7 +123,18 @@ class User extends ActiveRecord implements IdentityInterface
 
         ];
     }
+    public static function getArrayGroup(){
+        return ArrayHelper::map(Group::find()->andWhere(['display'=>Group::DISPLAY_ACTIVE])->andWhere(['status'=>Group::STATUS_ACTIVE])->all(), 'id', 'name');
+    }
+    public function getGroupLabel()
+    {
 
+        if ($this->_groupLabel === null) {
+            $group = self::getArrayGroup();
+            $this->_groupLabel =  array_key_exists($this->groupid,self::getArrayGroup()) ? $group[$this->groupid] : '无';
+        }
+        return $this->_groupLabel;
+    }
     /**
      * @inheritdoc
      */

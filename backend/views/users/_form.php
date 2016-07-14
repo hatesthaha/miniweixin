@@ -22,6 +22,7 @@ foreach($cat as $v){
 <div class="user-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'groupid')->dropDownList(User::getArrayGroup()) ?>
     <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => 255]) ?>
     <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => 255]) ?>

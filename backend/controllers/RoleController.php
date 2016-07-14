@@ -11,7 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 
 
-class RoleController extends Controller
+class RoleController extends BackendController
 {
 
 

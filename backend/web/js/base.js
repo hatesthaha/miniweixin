@@ -1,3 +1,4 @@
+
 //检查选项是否有值
 function mycheckbox() {
     var falg = 0;

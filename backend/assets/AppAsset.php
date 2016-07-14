@@ -13,9 +13,13 @@ class AppAsset extends AdminLteAsset
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'ztree/css/demo.css',
+        'ztree/css/zTreeStyle/zTreeStyle.css',
     ];
     public $js = [
         'js/base.js',
+        'ztree/js/jquery.ztree.core-3.5.js',
+        'ztree/js/jquery.ztree.excheck-3.5.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -1,16 +1,16 @@
 <?php
 
-namespace common\models\user;
+namespace common\models\group;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\user\User;
+use common\models\group\Group;
 
 /**
- * UserSearch represents the model behind the search form about `common\models\user\User`.
+ * GroupSearch represents the model behind the search form about `common\models\base\group\Group`.
  */
-class UserSearch extends User
+class GroupSearch extends Group
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'groupid','password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['id',  'created_at', 'updated_at', 'status', 'display', 'is_show'], 'integer'],
+            [['name', 'context'], 'safe'],
         ];
     }
 
@@ -41,14 +41,12 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
-
-        // add conditions that should always apply here
+        $query = Group::find()->andWhere(['status'=>Group::STATUS_ACTIVE])->orderBy('id DESC');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 2,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -60,19 +58,17 @@ class UserSearch extends User
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'status' => $this->status,
+            'display' => $this->display,
+            'is_show' => $this->is_show,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'context', $this->context]);
 
         return $dataProvider;
     }

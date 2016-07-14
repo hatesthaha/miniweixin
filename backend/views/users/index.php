@@ -62,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions'=>['class'=>'my-table'],
                 ],
 
-                'id',
                 [
                     'attribute'=>'username', 
                     'vAlign'=>'middle',
@@ -83,6 +82,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'password_hash',
                 // 'password_reset_token',
                 'email:email',
+                [
+                    'attribute' => 'groupid',
+                    'value' => function ($model) {
+                        return $model->groupLabel;
+                    },
+                    'filterType'=>GridView::FILTER_SELECT2,
+                    'filter'=>User::getArrayGroup(),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'全部'],
+                    'format'=>'raw'
+                ],
                 [
                     'attribute' => 'status',
                     'format' => 'html',

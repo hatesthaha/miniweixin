@@ -16,6 +16,7 @@ $this->params['breadcrumbs'] = [
 ?>
 <link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>ztree/css/demo.css" type="text/css">
 <link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script src="<?= Yii::getAlias('@web') . '/' ?>js/jquery.min.js"></script>
 <script src="<?= Yii::getAlias('@web') . '/' ?>ztree/js/jquery.ztree.core-3.5.js"></script>
 <script src="<?= Yii::getAlias('@web') . '/' ?>ztree/js/jquery.ztree.excheck-3.5.js"></script>
 <div class="row">

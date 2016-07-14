@@ -19,6 +19,7 @@ class BackendController extends \yii\rest\Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                      //  'allow' => \Yii::$app->user->can(wanhunet::$app->controller->getRoute()),
                         'allow' => true,
                         'roles' => [wanhunet::$app->controller->getRoute()],
                     ]
