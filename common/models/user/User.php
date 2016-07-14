@@ -1,5 +1,5 @@
 <?php
-namespace common\models;
+namespace common\models\user;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -25,8 +25,9 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
-
+    private $_statusLabel;
+    public $password;
+    public $repassword;
     /**
      * @inheritdoc
      */
@@ -44,15 +45,79 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
         ];
     }
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'repassword' => Yii::t('app', 'Repassword'),
+            'email' => Yii::t('app', 'Email'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
 
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
+            [['username', 'email'], 'required'],
+            [['username', 'email'], 'unique'],
+            [['username', 'email', 'password', 'repassword'], 'trim'],
+            [['password', 'repassword'], 'string', 'min' => 6, 'max' => 30],
+            // E-mail
+            ['email', 'string', 'max' => 100],
+            ['email', 'email'],
+            // Repassword
+            ['repassword', 'compare', 'compareAttribute' => 'password'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord || (!$this->isNewRecord && $this->password)) {
+                $this->setPassword($this->password);
+                $this->generateAuthKey();
+                $this->generatePasswordResetToken();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getStatusLabel()
+    {
+        if ($this->_statusLabel === null) {
+            $statuses = self::getArrayStatus();
+            $this->_statusLabel = array_key_exists($this->status,self::getArrayStatus()) ? $statuses[$this->status] : '无';
+        }
+        return $this->_statusLabel;
+    }
+        /**
+     * @inheritdoc
+     */
+    public static function getArrayStatus()
+    {
+        return [
+            self::STATUS_ACTIVE => Yii::t('app', 'STATUS_ACTIVE'),
+            self::STATUS_DELETED => Yii::t('app', 'STATUS_INACTIVE'),
+
         ];
     }
 

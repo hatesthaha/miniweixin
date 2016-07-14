@@ -8,6 +8,10 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            //'defaultRoles' => ['guest'],
+        ],
         'i18n' => [
             'translations' => [
                 '*' => [

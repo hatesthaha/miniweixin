@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\models\user\LoginForm;
 
 /**
  * Site controller
@@ -80,4 +80,7 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
+
 }

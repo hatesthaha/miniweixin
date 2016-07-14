@@ -23,6 +23,7 @@ return [
 
     'Create ' => '新增',
     'Create' => '新增',
+    'Create User'=> '创建用户',
     'Stop' => '停用',
     'Update ' => '修改',
     'Update' => '修改',
@@ -55,8 +56,11 @@ return [
     'successfully updated' => '更新成功',
     'successfully removed' => '删除成功',
     'still used' => '还在使用',
+    
+    'Created_At'=>'创建时间',
+    'Updated_At'=> '更新时间',
 
-    'Username' => '账户',
+    'Username' => '用户名',
     'Password' => '密码',
     'Repassword' => '确认密码',
     'Remember Me' => '自动登录',

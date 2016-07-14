@@ -35,6 +35,10 @@ if (Yii::$app->controller->action->id === 'login') {
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <link rel="stylesheet" href="<?= Yii::getAlias('@web') . '/' ?>css/base.css" type="text/css">
+        <?php if (isset($this->blocks['inline_scripts'])): ?>
+        <?= $this->blocks['inline_scripts'] ?>
+        <?php endif; ?>
     </head>
     <body class="<?= \dmstr\helpers\AdminLteHelper::skinClass() ?>">
     <?php $this->beginBody() ?>
@@ -59,6 +63,7 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+
     </body>
     </html>
     <?php $this->endPage() ?>

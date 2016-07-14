@@ -14,7 +14,8 @@ use yii\helpers\Html;
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
-        <?= $this->render('//layouts/top-menu.php') ?>
+
+        <?=  $this->render('//layouts/top-menu.php') ?>
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">

@@ -4,10 +4,20 @@ echo Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii111', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Menu', 'options' => ['class' => 'header']],
+                    [
+                        'label' => Yii::t('app', 'User'),
+                        'url' => ['/users/index'],
+                        'icon' => 'fa fa-user',
+                        'active' => 'users' === Yii::$app->controller->id
+                    ],
+                    [
+                        'label' => Yii::t('app', 'Role'),
+                        'url' => ['/role/index'],
+                        'icon' => 'fa fa-lock',
+                        'active' => 'role' === Yii::$app->controller->id
+                    ],
+                   
                     [
                         'label' => 'Same tools',
                         'icon' => 'fa fa-share',

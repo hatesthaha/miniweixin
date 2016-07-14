@@ -11,17 +11,17 @@ $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        当Web服务器处理您的请求时发生上述错误。
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        如果你认为这是一个服务器错误，请与我们联系。谢谢你。
     </p>
 
 </div>
