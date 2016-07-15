@@ -39,23 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'type'=>'default',
                 'footer'=>false
             ],
-
+            'toolbar' => [],
             'pager'=>[
                 'options'=>['class'=>'hidden']//关闭自带分页
             ],
             'persistResize'=>false,
-            'toolbar'=> [
 
-                    [
-                    'content'=>
-                        Html::a('<i class="glyphicon glyphicon-repeat"></i>', [], [
-                            'class' => 'btn btn-default',
-                            'title' => Yii::t('kvgrid', 'Reset Grid')
-                        ]),
-                    ],
-                    '{export}',
-            ],
-            'exportConfig'=>$exportConfig,
             'columns' => [
                 [
                     'class'=>'kartik\grid\CheckboxColumn',
