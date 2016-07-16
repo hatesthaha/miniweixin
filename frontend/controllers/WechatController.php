@@ -27,6 +27,6 @@ class WechatController extends Controller
     }
     public function actionCeshi(){
         $wechat = Yii::$app->wechat; 
-        var_dump($wechat->getOauth2AuthorizeUrl('localhost'));
+        var_dump($wechat->getJsApiTicket());
     }
 }
