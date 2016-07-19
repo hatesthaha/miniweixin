@@ -7,6 +7,7 @@ use Yii\web\HttpException;
 
 class SwitchMessage
 {
+    use \wanhunet\weixin\core\SendMessage;
     /**
      * @descrpition 分发请求
      * @param $request
@@ -68,7 +69,7 @@ class SwitchMessage
                 $data = self::link($request);
                 break;
             default:
-                return Yii::$app->wechat->sendText($request['FromUserName'], '收到未知的消息，我不知道怎么处理');
+                return $this->sendText($request['FromUserName'], '收到未知的消息，我不知道怎么处理');
                 break;
         }
 
@@ -80,9 +81,9 @@ class SwitchMessage
      * @return array
      */
     public static function text(&$request){
-        $wechat=Yii::$app->wechat;
+
         $content = '收到文本消息';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
     /**
      * @descrpition 图像
@@ -90,9 +91,9 @@ class SwitchMessage
      * @return array
      */
     public static function image(&$request){
-        $wechat=Yii::$app->wechat;
+   
         $content = '收到图片';
-        return $wechat->sendText($request['FromUserName'],  $content);
+        return $this->sendText($request['FromUserName'],  $content);
     }
 
     /**
@@ -101,13 +102,13 @@ class SwitchMessage
      * @return array
      */
     public static function voice(&$request){
-        $wechat=Yii::$app->wechat;
+  
         if(!isset($request['recognition'])){
             $content = '收到语音';
-            return $wechat->sendText($request['FromUserName'],  $content);
+            return $this->sendText($request['FromUserName'],  $content);
         }else{
             $content = '收到语音识别消息，语音识别结果为：'.$request['recognition'];
-            return $wechat->sendText($request['FromUserName'],  $content);
+            return $this->sendText($request['FromUserName'],  $content);
         }
     }
 
@@ -117,9 +118,9 @@ class SwitchMessage
      * @return array
      */
     public static function video(&$request){
-        $wechat=Yii::$app->wechat;
+
         $content = '收到视频';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -128,9 +129,9 @@ class SwitchMessage
      * @return array
      */
     public static function shortvideo(&$request){
-        $wechat=Yii::$app->wechat;
+
         $content = '收到小视频';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -139,9 +140,9 @@ class SwitchMessage
      * @return array
      */
     public static function location(&$request){
-        $wechat=Yii::$app->wechat;
+
         $content = '收到上报的地理位置';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -150,9 +151,9 @@ class SwitchMessage
      * @return array
      */
     public static function link(&$request){
-        $wechat=Yii::$app->wechat;
+       
         $content = '收到连接';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
     /**
      * @descrpition 关注
@@ -160,9 +161,9 @@ class SwitchMessage
      * @return array
      */
     public static function eventSubscribe(&$request){
-        $wechat=Yii::$app->wechat;
+     
         $content = '欢迎您关注我们的微信，将为您竭诚服务.';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -171,9 +172,9 @@ class SwitchMessage
      * @return array
      */
     public static function eventUnsubscribe(&$request){
-        $wechat=Yii::$app->wechat;
+      
         $content = '为什么不理我了？';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -182,9 +183,9 @@ class SwitchMessage
      * @return array
      */
     public static function eventQrsceneSubscribe(&$request){
-        $wechat=Yii::$app->wechat;
+
         $content = '欢迎您关注我们的微信，将为您竭诚服务.';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -193,9 +194,9 @@ class SwitchMessage
      * @return array
      */
     public static function eventScan(&$request){
-        $wechat=Yii::$app->wechat;
+     
         $content = '您已经关注了哦～';
-        return $wechat->sendText($request['FromUserName'], $content);
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -204,14 +205,8 @@ class SwitchMessage
      * @return array
      */
     public static function eventClick(&$request){
-        $wechat=Yii::$app->wechat;
-        if(isset($getrev)){
-            $content= $getrev['context'];
-        }else{
-            $content = '收到文本消息';
-        }
-
-        return $wechat->sendText($request['FromUserName'], $content);
+        $content = '收到文本消息';
+        return $this->sendText($request['FromUserName'], $content);
     }
 
     /**
@@ -220,10 +215,9 @@ class SwitchMessage
      * @return array
      */
     public static function eventView(&$request){
-        $wechat=Yii::$app->wechat;
         //获取该分类的信息
         $eventKey = $request['eventkey'];
         $content = '收到跳转链接事件，您设置的key是' . $eventKey;
-        return $wechat->sendText($request['fromusername'], $request['tousername'], $content);
+        return $this->sendText($request['fromusername'], $request['tousername'], $content);
     }
 }

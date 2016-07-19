@@ -7,7 +7,7 @@ use yii\base\Component;
 use yii\web\HttpException;
 use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
-
+use wanhunet\weixin\core\SwitchMessage;
 
 
 class Wechat extends Component
