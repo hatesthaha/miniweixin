@@ -20,7 +20,7 @@ trait JsApiTicket
     public function getJsApiTicket($force = false)
     {
         $time = time(); // 为了更精确控制.取当前时间计算
- 
+
         if ($this->_jsApiTicket === null || $this->_jsApiTicket['expire'] < $time || $force) {
             $result = $this->_jsApiTicket === null && !$force ? $this->getCache('js_api_ticket', false) : false;
 

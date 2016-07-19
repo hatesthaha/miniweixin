@@ -37,6 +37,18 @@ class Http
     {
         return $this->parseHttpResult($url, $params, 'post');
     }
+
+    /**
+     * Post方式发送raw包调用微信接口
+     * @param $url
+     * @param null $params
+     * @return array
+     */
+    public function httpRaw($url, $params = null)
+    {
+        is_array($params) && $params = json_encode($params, JSON_UNESCAPED_UNICODE);
+        return $this->parseHttpResult($url, $params, 'raw');
+    }
     /**
      * Api url 组装
      * @param $url

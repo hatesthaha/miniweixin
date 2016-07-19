@@ -31,6 +31,31 @@ class Wechat extends Component
     const API_TOKEN_GET = '/cgi-bin/token?';
     const WECHAT_JS_API_TICKET_PREFIX = '/cgi-bin/ticket/getticket';
     /**
+     * 发送模板消息
+     */
+    const WECHAT_TEMPLATE_MESSAGE_SEND_PREFIX = '/cgi-bin/message/template/send';
+    /**
+     * 发送客服消息
+     */
+    const WECHAT_CUSTOM_MESSAGE_SEND_PREFIX = '/cgi-bin/message/custom/send';
+    /**
+     * 自定义菜单创建接口
+     */
+    const WECHAT_MENU_CREATE_PREFIX = '/cgi-bin/menu/create';
+
+    /**
+     * 自定义菜单查询
+     */
+    const WECHAT_MENU_GET_PREFIX = '/cgi-bin/menu/get';
+    /**
+     * 自定义菜单删除接口(删除菜单)
+     */
+    const WECHAT_MENU_DELETE_PREFIX = '/cgi-bin/menu/delete';
+    /**
+     * 获取自定义菜单配置接口
+     */
+    const WECHAT_MENU_INFO_GET_PREFIX = '/cgi-bin/get_current_selfmenu_info';
+    /**
      * 微信接口基本地址
      */
     const WECHAT_BASE_URL = 'https://api.weixin.qq.com';
@@ -47,7 +72,7 @@ class Wechat extends Component
     /**
      * @var array
      */
-    protected $_jsApiTicket;
+    public $_jsApiTicket;
     /**
      * 数据缓存前缀
      * @var string
@@ -78,7 +103,8 @@ class Wechat extends Component
     use \wanhunet\weixin\core\AccessToken;
     use \wanhunet\weixin\core\Authcode;
     use \wanhunet\weixin\core\JsApiTicket;
-
+    use \wanhunet\weixin\core\SendMessage;
+    use \wanhunet\weixin\core\Menu;
     /**
      * @inheritdoc
      * @throws InvalidConfigException
@@ -115,5 +141,24 @@ class Wechat extends Component
         return sha1($tmpStr) == $signature;
     }
 
+    /**
+     * 解析微信请求内容
+     * @return array
+     * @throws NotFoundHttpException
+     */
+    public function parseRequest()
+    {
+        $xml =  (array) simplexml_load_string(file_get_contents('php://input'), 'SimpleXMLElement', LIBXML_NOCDATA);
+        if (empty($xml)) {
+            Yii::$app->response->content = 'Request data parse failed!';
+            Yii::$app->end();
+        }
+        $message = [];
+        foreach ($xml as $attribute => $value) {
+            $message[$attribute] = is_array($value) ? $value : (string) $value;
+        }
 
+        Yii::error($xml, __METHOD__);
+        return $message;
+    }
 }
