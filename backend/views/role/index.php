@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
 
 </div>
-<?php $this->beginBlock('inline_scripts'); ?>
+<?php $this->beginBlock('footer_scripts'); ?>
     <script>
         $(document).ready(function(){
                 bindqiyong("<?php echo Url::to(['role/start']);?>");
