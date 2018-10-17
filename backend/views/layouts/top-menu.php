@@ -8,8 +8,8 @@ $menuItemsMain = [
         'url' => ['/backend/roleactive'],
     ],
     [
-        'label' => '<!--<i class="fa fa-dashboard "></i> -->' . Yii::t('app', '显示管理'),
-        'url' => ['/show'],
+        'label' => '<!--<i class="fa fa-dashboard "></i> -->' . Yii::t('app', '项目管理'),
+        'url' => ['/filemanage/index'],
     ],
 
 ];

@@ -1,10 +1,17 @@
 <?php
 return [
     'language' => 'zh-CN',
-    'name' => '综合管理系统',
+    'name' => '项目管理系统',
     'timeZone' => 'Asia/Shanghai',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        // ...
+        'wechat' => [
+            'class' => 'maxwen\easywechat\Wechat',
+            // 'userOptions' => []  # user identity class params
+            // 'sessionParam' => '' # wechat user info will be stored in session under this key
+            // 'returnUrlParam' => '' # returnUrl param stored in session
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

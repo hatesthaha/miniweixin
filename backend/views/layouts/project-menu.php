@@ -4,27 +4,27 @@ echo Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
-                    ['label' => '权限管理', 'options' => ['class' => 'header']],
+                    ['label' => '项目管理', 'options' => ['class' => 'header']],
                     [
-                        'label' => Yii::t('app', 'Groups'),
+                        'label' => '财务管理',
                         'url' => ['/group/index'],
                         'icon' => 'fa fa-group',
                         'active' => 'group' === Yii::$app->controller->id,
-                        'visible' => \Yii::$app->user->can('group/index'),
+                        // 'visible' => \Yii::$app->user->can('group/index'),
                     ],
                     [
-                        'label' => Yii::t('app', 'Role'),
+                        'label' => '项目管理',
                         'url' => ['/role/index'],
                         'icon' => 'fa fa-lock',
                         'active' => 'role' === Yii::$app->controller->id,
-                        'visible' => \Yii::$app->user->can('role/index'),
+                        // 'visible' => \Yii::$app->user->can('role/index'),
                     ],
                     [
-                        'label' => Yii::t('app', 'User'),
-                        'url' => ['/users/index'],
+                        'label' => '存档管理',
+                        'url' => ['/filemanage/index'],
                         'icon' => 'fa fa-user',
                         'active' => 'users' === Yii::$app->controller->id,
-                        'visible' => \Yii::$app->user->can('users/index'),
+                        // 'visible' => \Yii::$app->user->can('users/index'),
                     ],
 
 
