@@ -64,9 +64,20 @@ class FinanceController extends Controller
     public function actionCreate()
     {
         $model = new Finance();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->username = Yii::$app->user->identity->username;
+        if ($model->load(Yii::$app->request->post())) {
+          $model->qddate = strtotime(Yii::$app->request->post()['Finance']['qddate']);
+          $model->sdkdate = strtotime(Yii::$app->request->post()['Finance']['sdkdate']);
+          $model->wkdate = strtotime(Yii::$app->request->post()['Finance']['wkdate']);
+          if( $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            Yii::$app->session->setFlash('warning', Yii::t('app', '保存未成功，信息没有填写完整'));
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+          }
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,9 +95,26 @@ class FinanceController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+          $model->qddate = strtotime(Yii::$app->request->post()['Finance']['qddate']);
+          $model->sdkdate = strtotime(Yii::$app->request->post()['Finance']['sdkdate']);
+          $model->wkdate = strtotime(Yii::$app->request->post()['Finance']['wkdate']);
+          if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            Yii::$app->session->setFlash('warning', Yii::t('app', '保存未成功，信息没有填写完整'));
+            $model->qddate = date('Y-m-d', $model->qddate);
+            $model->sdkdate = date('Y-m-d', $model->sdkdate);
+            $model->wkdate = date('Y-m-d', $model->wkdate);
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+           
         } else {
+          $model->qddate = date('Y-m-d', $model->qddate);
+          $model->sdkdate = date('Y-m-d', $model->sdkdate);
+          $model->wkdate = date('Y-m-d', $model->wkdate);
             return $this->render('update', [
                 'model' => $model,
             ]);

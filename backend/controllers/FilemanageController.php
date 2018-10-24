@@ -8,11 +8,14 @@ use common\models\filemanage\FilemanageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\file\FileInput;//图片上传
+use yii\web\UploadedFile;
+use wanhunet\helpers\Utils;
 
 /**
  * FilemanageController implements the CRUD actions for Filemanage model.
  */
-class FilemanageController extends Controller
+class FilemanageController extends BackendController
 {
     /**
      * @inheritdoc
@@ -64,9 +67,31 @@ class FilemanageController extends Controller
     public function actionCreate()
     {
         $model = new Filemanage();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->writename = Yii::$app->user->identity->username;
+        $model->username = Yii::$app->user->identity->username;
+        if ($model->load(Yii::$app->request->post()) ) {
+          $model->filedate = strtotime(Yii::$app->request->post()['Filemanage']['filedate']);
+          $model->file = UploadedFile::getInstance($model, 'file');
+          if($model->file){           
+              $siteRoot = Yii::$app->params['img'];
+              $json = Utils::uploadfile($_FILES['Filemanage']['tmp_name']['file'],$_FILES['Filemanage']['name']['file'],$siteRoot);
+              $model->file = $json;   		
+          }
+          $model->piwen = UploadedFile::getInstance($model, 'piwen');
+          if($model->piwen){           
+              $siteRoot = Yii::$app->params['img'];
+              $json = Utils::uploadfile($_FILES['Filemanage']['tmp_name']['piwen'],$_FILES['Filemanage']['name']['piwen'],$siteRoot);
+              $model->piwen = $json;   		
+          }
+          if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            Yii::$app->session->setFlash('warning', Yii::t('app', '保存未成功，信息没有填写完整'));
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+          }
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,9 +109,40 @@ class FilemanageController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+          $model->filedate = strtotime(Yii::$app->request->post()['Filemanage']['filedate']);
+          $model->file = UploadedFile::getInstance($model, 'file');
+          if($model->file){           
+              $siteRoot = Yii::$app->params['img'];
+              $json = Utils::uploadfile($_FILES['Filemanage']['tmp_name']['file'],$_FILES['Filemanage']['name']['file'],$siteRoot);
+              $model->file = $json;   		
+          }
+          if (!$model->file) {
+            $new = $this->findModel($id);
+            $model->file = $new->file;
+          }
+          $model->piwen = UploadedFile::getInstance($model, 'piwen');
+          if($model->piwen){           
+              $siteRoot = Yii::$app->params['img'];
+              $json = Utils::uploadfile($_FILES['Filemanage']['tmp_name']['piwen'],$_FILES['Filemanage']['name']['piwen'],$siteRoot);
+              $model->piwen = $json;   		
+          }
+          if (!$model->piwen) {
+            $newpiwen = $this->findModel($id);
+            $model->piwen = $newpiwen->piwen;
+          }
+          if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            $model->filedate = date('Y-m-d', $model->filedate);
+            Yii::$app->session->setFlash('warning', Yii::t('app', '保存未成功，信息没有填写完整'));
+            return $this->render('update', [
+              'model' => $model,
+          ]); 
+          }
+         
         } else {
+          $model->filedate = date('Y-m-d', $model->filedate);
             return $this->render('update', [
                 'model' => $model,
             ]);

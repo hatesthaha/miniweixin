@@ -6,10 +6,11 @@ $menuItemsMain = [
     [
         'label' => '<!--<i class="fa fa-dashboard "></i> -->' . Yii::t('app', '权限管理'),
         'url' => ['/backend/roleactive'],
+        'visible' => \Yii::$app->user->can('group/index'),
     ],
     [
         'label' => '<!--<i class="fa fa-dashboard "></i> -->' . Yii::t('app', '项目管理'),
-        'url' => ['/filemanage/index'],
+        'url' => ['/projectmanage/index'],
     ],
 
 ];

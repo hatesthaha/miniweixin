@@ -6,13 +6,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\projectmanage\Projectmanage */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Projectmanages'), 'url' => ['index']];
+$this->title = $model->projectname;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '项目管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php $this->beginBlock('siderbar'); ?>
+<?= $this->render('//layouts/project-menu') ?>
+<?php $this->endBlock(); ?>
 <div class="projectmanage-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -39,15 +42,34 @@ $this->params['breadcrumbs'][] = $this->title;
             'projectuser',
             'projectin',
             'approvalname',
-            'tkandate',
-            'bsdate',
-            'psdate',
-            'bpjfdate',
+            [
+              'attribute' => 'tkandate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+              'attribute' => 'bsdate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+              'attribute' => 'psdate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+              'attribute' => 'bpjfdate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+  
             'remark:ntext',
             'jindu:ntext',
             'username',
-            'created_at',
-            'updated_at',
+            [
+              'attribute' => 'created_at',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['date', 'php:Y-m-d'],
+            ],
         ],
     ]) ?>
 

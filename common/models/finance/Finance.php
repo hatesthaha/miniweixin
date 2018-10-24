@@ -3,7 +3,7 @@
 namespace common\models\finance;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "finance".
  *
@@ -27,6 +27,14 @@ use Yii;
  */
 class Finance extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -41,10 +49,9 @@ class Finance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['qddate', 'sdkdate', 'wkdate', 'created_at', 'updated_at'], 'integer'],
             [['htmoney', 'sfmoney', 'wkmoney', 'jcmoney', 'dixiasmoney', 'premoney'], 'number'],
             [['remark'], 'string'],
-            [['jcunit', 'hezuofang', 'username'], 'string', 'max' => 255],
+            [['jcunit', 'hezuofang'], 'string', 'max' => 255],
             [['ticheng'], 'string', 'max' => 2],
         ];
     }

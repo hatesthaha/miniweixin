@@ -8,7 +8,7 @@ use common\models\auth\Auth;
 /* @var $this yii\web\View */
 /* @var $model common\models\user\User */
 /* @var $form yii\widgets\ActiveForm */
-$allcat =Auth::find()->andWhere(['type'=>1])->andWhere(['status'=>1])->andWhere(['display'=>1])->all();
+$allcat =Auth::find()->andWhere(['type'=>1])->andWhere(['status'=>10])->andWhere(['display'=>1])->all();
 
 $cat = Yii::$app->authManager->getRolesByUser($model->id);
 

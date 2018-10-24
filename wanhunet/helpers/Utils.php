@@ -225,6 +225,29 @@ class Utils
         return $pipei;
     }
 
+    /**
+     * 创建目录（递归）
+    */
+    public static function makeDIR($dir)
+    {
+        if (is_dir($dir) || @mkdir($dir)) return TRUE;
+        if (!self::makeDIR(dirname($dir))) return FALSE;
+        return @mkdir($dir);
+    }
+    #上传文件
+    public static function uploadfile($filetmpimg,$filename,$siteRoot){
+        $tempPath = $filetmpimg;
+
+        $filesName = uniqid() . '.' . pathinfo($filename, PATHINFO_EXTENSION);
+        $uploadPath = $siteRoot . $filesName;
+        self::makeDIR(dirname($uploadPath));
+        move_uploaded_file($tempPath, $uploadPath);
+
+        $answer = array('newname' => $filesName,'oldname'=>$filename);
+        $json = json_encode($answer);
+        return $json;
+    }
+
 
 
 }

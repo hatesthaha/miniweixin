@@ -2,47 +2,103 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use dosamigos\datepicker\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\finance\Finance */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<?php $this->beginBlock('siderbar'); ?>
+<?= $this->render('//layouts/project-menu') ?>
+<?php $this->endBlock(); ?>
 <div class="finance-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+    <div class="col-md-6 ">
+      <?= $form->field($model, 'qddate')->widget(
+          DatePicker::className(), [
+              // inline too, not bad
 
-    <?= $form->field($model, 'qddate')->textInput() ?>
+              // modify template for custom rendering
+              'template' => '{addon}{input}',
+              'language' => 'zh-CN',
+              'clientOptions' => [
+                  'autoclose' => true,
+                  'format' => 'yyyy-mm-dd'
+              ]
+      ]);?>
+    </div>
+    <div class="col-md-6 ">
+      <?= $form->field($model, 'htmoney')->textInput(['maxlength' => true]) ?>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 ">
+      <?= $form->field($model, 'sdkdate')->widget(
+          DatePicker::className(), [
+              // inline too, not bad
 
-    <?= $form->field($model, 'htmoney')->textInput(['maxlength' => true]) ?>
+              // modify template for custom rendering
+              'template' => '{addon}{input}',
+              'language' => 'zh-CN',
+              'clientOptions' => [
+                  'autoclose' => true,
+                  'format' => 'yyyy-mm-dd'
+              ]
+      ]);?>
+    </div>
+    <div class="col-md-6 ">
+      <?= $form->field($model, 'sfmoney')->textInput(['maxlength' => true]) ?>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'wkdate')->widget(
+            DatePicker::className(), [
+                // inline too, not bad
 
-    <?= $form->field($model, 'sdkdate')->textInput() ?>
+                // modify template for custom rendering
+                'template' => '{addon}{input}',
+                'language' => 'zh-CN',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+        ]);?>
+      </div>
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'wkmoney')->textInput(['maxlength' => true]) ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'jcunit')->textInput() ?>
+      </div>
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'jcmoney')->textInput(['maxlength' => true]) ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'hezuofang')->textInput() ?>
+      </div>
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'dixiasmoney')->textInput(['maxlength' => true]) ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'premoney')->textInput() ?>
+      </div>
+      <div class="col-md-6 ">
+        <?= $form->field($model, 'ticheng')->radioList(['是'=>'是','否'=>'否']) ?>
+      </div>
+    </div>
 
-    <?= $form->field($model, 'sfmoney')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'wkdate')->textInput() ?>
-
-    <?= $form->field($model, 'wkmoney')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'jcunit')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'jcmoney')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'hezuofang')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'dixiasmoney')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'premoney')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ticheng')->textInput() ?>
 
     <?= $form->field($model, 'remark')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

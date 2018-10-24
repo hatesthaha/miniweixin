@@ -31,5 +31,7 @@ return [
         ['name' => '启用用户', 'action' => 'users/start', 'show' => true, 'params' => '', 'id' => 10000036, 'pId' => 1000003],
         ['name' => '停用用户', 'action' => 'users/stop', 'show' => true, 'params' => '', 'id' => 10000037, 'pId' => 1000003],
 
+        ['name' => '项目管理', 'action' => 'backend/project', 'show' => true, 'params' => '', 'id' => 20, 'pId' => ''],
+
     ]
 ];

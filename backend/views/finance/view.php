@@ -7,12 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model common\models\finance\Finance */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Finances'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '财务管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php $this->beginBlock('siderbar'); ?>
+<?= $this->render('//layouts/project-menu') ?>
+<?php $this->endBlock(); ?>
 <div class="finance-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,11 +31,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'qddate',
+            [
+              'attribute' => 'qddate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+        
             'htmoney',
-            'sdkdate',
+            [
+              'attribute' => 'sdkdate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+ 
             'sfmoney',
-            'wkdate',
+            [
+              'attribute' => 'wkdate',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+
             'wkmoney',
             'jcunit',
             'jcmoney',
@@ -43,8 +57,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'ticheng',
             'remark:ntext',
             'username',
-            'created_at',
-            'updated_at',
+            [
+              'attribute' => 'created_at',
+              'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['date', 'php:Y-m-d'],
+            ],
         ],
     ]) ?>
 

@@ -31,7 +31,7 @@ class Auth extends \yii\db\ActiveRecord
     const DISPLAY_ACTIVE = 1;
     const DISPLAY_DELETED = -1;
 
-    const STATUS_ACTIVE = 1;
+    const STATUS_ACTIVE = 10;
     const STATUS_DELETED = -1;
     public $_permissions = [];
     private $_displayLabel;

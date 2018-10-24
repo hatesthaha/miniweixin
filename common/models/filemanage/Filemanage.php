@@ -3,6 +3,7 @@
 namespace common\models\filemanage;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "filemanage".
@@ -19,6 +20,14 @@ use Yii;
  */
 class Filemanage extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -33,8 +42,8 @@ class Filemanage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['filedate', 'created_at', 'updated_at'], 'integer'],
             [['remark'], 'string'],
+            [['filedate'], 'required'],
             [['file', 'piwen', 'writename', 'username'], 'string', 'max' => 255],
         ];
     }
@@ -46,11 +55,11 @@ class Filemanage extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'filedate' => Yii::t('app', 'Filedate'),
-            'file' => Yii::t('app', 'File'),
-            'piwen' => Yii::t('app', 'Piwen'),
-            'writename' => Yii::t('app', 'Writename'),
-            'remark' => Yii::t('app', 'Remark'),
+            'filedate' => Yii::t('app', '存档日期'),
+            'file' => Yii::t('app', '报告上传'),
+            'piwen' => Yii::t('app', '批文上传'),
+            'writename' => Yii::t('app', '项目编写人'),
+            'remark' => Yii::t('app', '备注'),
             'username' => Yii::t('app', 'Username'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

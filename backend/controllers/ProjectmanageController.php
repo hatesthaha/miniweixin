@@ -64,9 +64,21 @@ class ProjectmanageController extends Controller
     public function actionCreate()
     {
         $model = new Projectmanage();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->username = Yii::$app->user->identity->username;
+        if ($model->load(Yii::$app->request->post()) ) {
+          $model->tkandate = strtotime(Yii::$app->request->post()['Projectmanage']['tkandate']);
+          $model->bsdate = strtotime(Yii::$app->request->post()['Projectmanage']['bsdate']);
+          $model->psdate = strtotime(Yii::$app->request->post()['Projectmanage']['psdate']);
+          $model->bpjfdate = strtotime(Yii::$app->request->post()['Projectmanage']['bpjfdate']);
+          if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            Yii::$app->session->setFlash('warning', Yii::t('app', '保存未成功，信息没有填写完整'));
+            return $this->render('create', [
+              'model' => $model,
+          ]); 
+          }
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,9 +96,29 @@ class ProjectmanageController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+          $model->tkandate = strtotime(Yii::$app->request->post()['Projectmanage']['tkandate']);
+          $model->bsdate = strtotime(Yii::$app->request->post()['Projectmanage']['bsdate']);
+          $model->psdate = strtotime(Yii::$app->request->post()['Projectmanage']['psdate']);
+          $model->bpjfdate = strtotime(Yii::$app->request->post()['Projectmanage']['bpjfdate']);
+          if($model->save()){
+            
             return $this->redirect(['view', 'id' => $model->id]);
+          }else{
+            $model->tkandate = date('Y-m-d', $model->tkandate);
+            $model->bsdate = date('Y-m-d', $model->bsdate);
+            $model->psdate = date('Y-m-d', $model->psdate);
+            $model->bpjfdate = date('Y-m-d', $model->bpjfdate);
+            return $this->render('update', [
+              'model' => $model,
+          ]);
+          }
+            
         } else {
+          $model->tkandate = date('Y-m-d', $model->tkandate);
+            $model->bsdate = date('Y-m-d', $model->bsdate);
+            $model->psdate = date('Y-m-d', $model->psdate);
+            $model->bpjfdate = date('Y-m-d', $model->bpjfdate);
             return $this->render('update', [
                 'model' => $model,
             ]);
