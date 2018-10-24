@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
-        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+        'headerRowOptions'=>['class'=>'myform'],
         'filterRowOptions'=>['class'=>'filters'],
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> 数据列表</h3>',
@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
+
               'attribute' => 'filedate',
               'format' => ['date', 'Y-M-d'],
             ],

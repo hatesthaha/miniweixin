@@ -28,11 +28,12 @@ use dmstr\widgets\Alert;
             ]
         ) ?>
     </section>
-
+    <aside class="right-side">
     <section class="content">
         <?= Alert::widget() ?>
         <?= $content ?>
     </section>
+    </aside>
 </div>
 
 <footer class="main-footer">

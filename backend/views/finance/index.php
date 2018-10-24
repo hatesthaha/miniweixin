@@ -15,6 +15,30 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
 <?php $this->endBlock(); ?>
+<style>
+.right-side {
+       
+       
+        overflow-x: scroll;
+
+    }
+.table-responsive{
+        overflow-x:hidden;
+    }
+    .content{
+        width:2100px;
+        overflow-x: hidden;
+    }
+</style>
+<script>
+    $(function(){
+        var b=$(window).height()-55;
+        $(".right-side").css({
+            'height':b
+
+        })
+    })
+</script>
 <div class="finance-index">
 
    
@@ -28,8 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax'=>true,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
-        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+        'containerOptions'=>['style'=>'overflow-x: inherit;'], // only set when $responsive = false
+        'headerRowOptions'=>['class'=>'myform'],
         'filterRowOptions'=>['class'=>'filters'],
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> 数据列表</h3>',
@@ -59,15 +83,19 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute' => 'qddate',
               'format' => ['date', 'Y-M-d'],
+              'headerOptions' => ['width' => '150'],
             ],
-    
+            
             'htmoney',
             [
               'attribute' => 'sdkdate',
               'format' => ['date', 'Y-M-d'],
             ],
- 
-            'sfmoney',
+            [
+              'attribute' => 'sfmoney',
+              'headerOptions' => ['width' => '150'],
+            ],
+            
             [
               'attribute' => 'wkdate',
               'format' => ['date', 'Y-M-d'],
