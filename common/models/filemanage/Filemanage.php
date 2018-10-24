@@ -60,7 +60,7 @@ class Filemanage extends \yii\db\ActiveRecord
             'piwen' => Yii::t('app', '批文上传'),
             'writename' => Yii::t('app', '项目编写人'),
             'remark' => Yii::t('app', '备注'),
-            'username' => Yii::t('app', 'Username'),
+            'username' => Yii::t('app', '操作人'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

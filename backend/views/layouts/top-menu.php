@@ -20,7 +20,7 @@ echo Nav::widget([
     'encodeLabels' => false,
 ]);
 $menuItems = [
-    ['label' => '首页', 'url' => ['/site/index']],
+    ['label' => '修改密码', 'url' => ['/member/password','id'=>Yii::$app->user->identity->id]],
 ];
 if (Yii::$app->user->isGuest) {
     $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];

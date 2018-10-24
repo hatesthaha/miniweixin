@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'format' => ['date', 'Y-M-d'],
             ],
             'writename',
-
+            'username',
             [
               'attribute' => 'created_at',
               'format' => ['date', 'Y-M-d H:i:s'],

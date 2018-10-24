@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'premoney',
             'ticheng',
 
-  
+            'username',
 
 
             ['class' => 'kartik\grid\ActionColumn',

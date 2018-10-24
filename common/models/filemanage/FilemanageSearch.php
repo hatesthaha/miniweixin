@@ -41,7 +41,13 @@ class FilemanageSearch extends Filemanage
      */
     public function search($params)
     {
+      $user = current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id));
+      if($user->name == 'admin'){
         $query = Filemanage::find();
+      }else{
+        $query = Filemanage::find();
+        $query->andWhere(['username'=>Yii::$app->user->identity->username]);
+      }
 
         // add conditions that should always apply here
 

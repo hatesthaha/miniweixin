@@ -76,7 +76,7 @@ class Finance extends \yii\db\ActiveRecord
             'premoney' => Yii::t('app', '专家费用（元）'),
             'ticheng' => Yii::t('app', '是否提成'),
             'remark' => Yii::t('app', '备注'),
-            'username' => Yii::t('app', 'Username'),
+            'username' => Yii::t('app', '操作人'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

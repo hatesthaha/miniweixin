@@ -81,7 +81,7 @@ class Projectmanage extends \yii\db\ActiveRecord
             'bpjfdate' => Yii::t('app', '报批版交付日期'),
             'remark' => Yii::t('app', '备注'),
             'jindu' => Yii::t('app', '进度'),
-            'username' => Yii::t('app', 'Username'),
+            'username' => Yii::t('app', '操作人'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

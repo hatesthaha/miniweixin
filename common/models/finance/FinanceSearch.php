@@ -42,7 +42,14 @@ class FinanceSearch extends Finance
      */
     public function search($params)
     {
+
+      $user = current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id));
+      if($user->name == 'admin'){
         $query = Finance::find();
+      }else{
+        $query = Finance::find();
+        $query->andWhere(['username'=>Yii::$app->user->identity->username]);
+      }
 
         // add conditions that should always apply here
 
