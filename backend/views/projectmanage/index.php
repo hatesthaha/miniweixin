@@ -60,8 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'contactphone',
             'projectarea',
             'projectname',
-            'projectuser',
-            'projectin',
+            'projecttype',
             'approvalname',
        
             'username',

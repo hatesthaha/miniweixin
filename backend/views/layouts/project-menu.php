@@ -8,14 +8,14 @@ echo Menu::widget(
                     [
                       'label' => '项目管理',
                       'url' => ['/projectmanage/index'],
-                      'icon' => 'fa fa-lock',
+                      'icon' => 'align-justify',
                       'active' => 'projectmanage' === Yii::$app->controller->id,
                       // 'visible' => \Yii::$app->user->can('role/index'),
                   ],
                     [
                         'label' => '财务管理',
                         'url' => ['/finance/index'],
-                        'icon' => 'fa fa-group',
+                        'icon' => 'money',
                         'active' => 'finance' === Yii::$app->controller->id,
                         // 'visible' => \Yii::$app->user->can('group/index'),
                     ],
@@ -23,7 +23,7 @@ echo Menu::widget(
                     [
                         'label' => '存档管理',
                         'url' => ['/filemanage/index'],
-                        'icon' => 'fa fa-user',
+                        'icon' => 'clipboard',
                         'active' => 'filemanage' === Yii::$app->controller->id,
                         // 'visible' => \Yii::$app->user->can('users/index'),
                     ],

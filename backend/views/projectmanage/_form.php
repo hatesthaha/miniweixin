@@ -91,6 +91,7 @@ use kartik\select2\Select2;
                 'template' => '{addon}{input}',
                 'language' => 'zh-CN',
                 'clientOptions' => [
+                  'todayBtn' => 'linked',
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]
@@ -106,6 +107,7 @@ use kartik\select2\Select2;
                 'template' => '{addon}{input}',
                 'language' => 'zh-CN',
                 'clientOptions' => [
+                  'todayBtn' => 'linked',
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]
@@ -124,6 +126,7 @@ use kartik\select2\Select2;
                 'template' => '{addon}{input}',
                 'language' => 'zh-CN',
                 'clientOptions' => [
+                  'todayBtn' => 'linked',
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]
@@ -139,6 +142,7 @@ use kartik\select2\Select2;
                 'template' => '{addon}{input}',
                 'language' => 'zh-CN',
                 'clientOptions' => [
+                  'todayBtn' => 'linked',
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]

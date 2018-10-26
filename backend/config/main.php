@@ -40,7 +40,7 @@ return [
         'assetManager' => [
             'bundles' => [
                 'dmstr\web\AdminLteAsset' => [
-                    'skin' => 'skin-purple-light',
+                    'skin' => 'skin-blue-light',
                 ],
             ],
         ],

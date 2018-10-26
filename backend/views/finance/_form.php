@@ -18,13 +18,13 @@ use dosamigos\datepicker\DatePicker;
       <?= $form->field($model, 'qddate')->widget(
           DatePicker::className(), [
               // inline too, not bad
-
               // modify template for custom rendering
               'template' => '{addon}{input}',
               'language' => 'zh-CN',
               'clientOptions' => [
                   'autoclose' => true,
-                  'format' => 'yyyy-mm-dd'
+                  'format' => 'yyyy-mm-dd',
+                  'todayBtn' => 'linked',
               ]
       ]);?>
     </div>
@@ -42,6 +42,7 @@ use dosamigos\datepicker\DatePicker;
               'template' => '{addon}{input}',
               'language' => 'zh-CN',
               'clientOptions' => [
+                'todayBtn' => 'linked',
                   'autoclose' => true,
                   'format' => 'yyyy-mm-dd'
               ]
@@ -61,6 +62,7 @@ use dosamigos\datepicker\DatePicker;
                 'template' => '{addon}{input}',
                 'language' => 'zh-CN',
                 'clientOptions' => [
+                  'todayBtn' => 'linked',
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ]

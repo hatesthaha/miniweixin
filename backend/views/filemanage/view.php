@@ -52,12 +52,12 @@ if(isset(json_decode($model->piwen)->newname)){
             [
               'attribute' => 'file',
               'format' => 'raw',
-              'value'  => !empty($fileimg)?Html::a($fileoldimg,Yii::$app->params['downimg'].$fileimg):null,
+              'value'  => !empty($fileimg)?Html::a($fileoldimg,Yii::$app->params['downimg'].'/'.$fileimg):null,
             ],
             [
               'attribute' => 'piwen',
               'format' => 'raw',
-              'value'  => !empty($piwenimg)?Html::a($piwenoldimg,Yii::$app->params['downimg'].$piwenimg):null,
+              'value'  => !empty($piwenimg)?Html::a($piwenoldimg,Yii::$app->params['downimg'].'/'.$piwenimg):null,
             ],
 
             'writename',

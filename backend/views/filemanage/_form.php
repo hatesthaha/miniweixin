@@ -36,6 +36,7 @@ if(isset(json_decode($model->piwen)->newname)){
             'template' => '{addon}{input}',
             'language' => 'zh-CN',
             'clientOptions' => [
+              'todayBtn' => 'linked',
                 'autoclose' => true,
                 'format' => 'yyyy-mm-dd'
             ]

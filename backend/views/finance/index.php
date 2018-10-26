@@ -15,30 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
 <?php $this->endBlock(); ?>
-<style>
-.right-side {
-       
-       
-        overflow-x: scroll;
 
-    }
-.table-responsive{
-        overflow-x:hidden;
-    }
-    .content{
-        width:2100px;
-        overflow-x: hidden;
-    }
-</style>
-<script>
-    $(function(){
-        var b=$(window).height()-55;
-        $(".right-side").css({
-            'height':b
-
-        })
-    })
-</script>
 <div class="finance-index">
 
    
@@ -52,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax'=>true,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'containerOptions'=>['style'=>'overflow-x: inherit;'], // only set when $responsive = false
+        'containerOptions'=>['style'=>'overflow: auto;'], // only set when $responsive = false
         'headerRowOptions'=>['class'=>'myform'],
         'filterRowOptions'=>['class'=>'filters'],
         'panel'=>[
@@ -87,27 +64,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             
             'htmoney',
-            [
-              'attribute' => 'sdkdate',
-              'format' => ['date', 'Y-M-d'],
-            ],
-            [
-              'attribute' => 'sfmoney',
-              'headerOptions' => ['width' => '150'],
-            ],
+            // [
+            //   'attribute' => 'sdkdate',
+            //   'format' => ['date', 'Y-M-d'],
+            // ],
+            // [
+            //   'attribute' => 'sfmoney',
+            //   'headerOptions' => ['width' => '150'],
+            // ],
             
-            [
-              'attribute' => 'wkdate',
-              'format' => ['date', 'Y-M-d'],
-            ],
+            // [
+            //   'attribute' => 'wkdate',
+            //   'format' => ['date', 'Y-M-d'],
+            // ],
    
-            'wkmoney',
+            // 'wkmoney',
             'jcunit',
             'jcmoney',
-            'hezuofang',
-            'dixiasmoney',
+            // 'hezuofang',
+            // 'dixiasmoney',
             'premoney',
-            'ticheng',
+            // 'ticheng',
 
             'username',
 

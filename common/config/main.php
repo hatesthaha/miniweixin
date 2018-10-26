@@ -1,7 +1,7 @@
 <?php
 return [
     'language' => 'zh-CN',
-    'name' => '项目管理系统',
+    'name' => '新澜环保管理系统',
     'timeZone' => 'Asia/Shanghai',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
