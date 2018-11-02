@@ -71,7 +71,9 @@ class FinanceController extends Controller
           $model->sdkdate = strtotime(Yii::$app->request->post()['Finance']['sdkdate']);
           $model->wkdate = strtotime(Yii::$app->request->post()['Finance']['wkdate']);
           $projectid = Yii::$app->request->post()['Finance']['projectid'];
-          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
+          if( $projectid){
+            $model->projectname = Projectmanage::findOne(['id'=>$projectid])->projectname;
+          }
           if( $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
           }else{
@@ -106,7 +108,10 @@ class FinanceController extends Controller
           $model->sdkdate = strtotime(Yii::$app->request->post()['Finance']['sdkdate']);
           $model->wkdate = strtotime(Yii::$app->request->post()['Finance']['wkdate']);
           $projectid = Yii::$app->request->post()['Finance']['projectid'];
-          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
+          if( $projectid){
+            $model->projectname = Projectmanage::findOne(['id'=>$projectid])->projectname;
+          }
+          
           if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
           }else{

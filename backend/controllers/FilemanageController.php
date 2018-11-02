@@ -84,7 +84,9 @@ class FilemanageController extends BackendController
               $model->piwen = $json;   		
           }
           $projectid = Yii::$app->request->post()['Filemanage']['projectid'];
-          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
+          if( $projectid){
+            $model->projectname = Projectmanage::findOne(['id'=>$projectid])->projectname;
+          }
           if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
           }else{
@@ -134,7 +136,9 @@ class FilemanageController extends BackendController
             $model->piwen = $newpiwen->piwen;
           }
           $projectid = Yii::$app->request->post()['Filemanage']['projectid'];
-          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
+          if( $projectid){
+            $model->projectname = Projectmanage::findOne(['id'=>$projectid])->projectname;
+          }
           if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
           }else{
