@@ -44,7 +44,7 @@ class Filemanage extends \yii\db\ActiveRecord
     {
         return [
             [['remark'], 'string'],
-            [['filedate'], 'required'],
+            [['filedate','projectid'], 'required'],
             [['file', 'piwen', 'writename', 'username'], 'string', 'max' => 255],
         ];
     }
