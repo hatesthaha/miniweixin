@@ -20,7 +20,7 @@ class FinanceSearch extends Finance
         return [
             [['id', 'qddate', 'sdkdate', 'wkdate', 'created_at', 'updated_at'], 'integer'],
             [['htmoney', 'sfmoney', 'wkmoney', 'jcmoney', 'dixiasmoney', 'premoney'], 'number'],
-            [['jcunit', 'hezuofang', 'ticheng', 'remark', 'username'], 'safe'],
+            [['jcunit', 'hezuofang', 'ticheng', 'remark', 'username','projectname'], 'safe'],
         ];
     }
 
@@ -86,6 +86,7 @@ class FinanceSearch extends Finance
 
         $query->andFilterWhere(['like', 'jcunit', $this->jcunit])
             ->andFilterWhere(['like', 'hezuofang', $this->hezuofang])
+            ->andFilterWhere(['like', 'projectname', $this->projectname])
             ->andFilterWhere(['like', 'ticheng', $this->ticheng])
             ->andFilterWhere(['like', 'remark', $this->remark])
             ->andFilterWhere(['like', 'username', $this->username]);

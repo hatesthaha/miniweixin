@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions'=>['class'=>'my-table'],
             ],
 
-
+            'projectname',
             [
 
               'attribute' => 'filedate',

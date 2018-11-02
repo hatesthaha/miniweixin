@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
+use common\models\finance\Finance;
+use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\finance\Finance */
 /* @var $form yii\widgets\ActiveForm */
@@ -13,6 +15,22 @@ use dosamigos\datepicker\DatePicker;
 <div class="finance-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+      <div class="col-md-12 ">
+        <?php
+          echo '<label class="control-label">项目名称</label>';
+          echo Select2::widget([
+            'name' => 'Finance[projectid]',
+            'data' => Finance::getArrayProject(),
+            'options' => [
+                'placeholder' => '请选择 ...',
+                'allowClear' => true
+            ],
+          ]);
+          ?>
+        
+      </div>
+    </div>
     <div class="row">
     <div class="col-md-6 ">
       <?= $form->field($model, 'qddate')->widget(

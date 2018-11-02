@@ -19,7 +19,7 @@ class FilemanageSearch extends Filemanage
     {
         return [
             [['id', 'filedate', 'created_at', 'updated_at'], 'integer'],
-            [['file', 'piwen', 'writename', 'remark', 'username'], 'safe'],
+            [['file', 'piwen', 'writename', 'remark', 'username','projectname'], 'safe'],
         ];
     }
 
@@ -75,6 +75,7 @@ class FilemanageSearch extends Filemanage
         ]);
 
         $query->andFilterWhere(['like', 'file', $this->file])
+            ->andFilterWhere(['like', 'projectname', $this->projectname])
             ->andFilterWhere(['like', 'piwen', $this->piwen])
             ->andFilterWhere(['like', 'writename', $this->writename])
             ->andFilterWhere(['like', 'remark', $this->remark])

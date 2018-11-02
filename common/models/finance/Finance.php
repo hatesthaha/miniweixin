@@ -4,6 +4,8 @@ namespace common\models\finance;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use common\models\projectmanage\Projectmanage;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "finance".
  *
@@ -49,13 +51,16 @@ class Finance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['projectid'], 'required'],
             [['htmoney', 'sfmoney', 'wkmoney', 'jcmoney', 'dixiasmoney', 'premoney'], 'number'],
             [['remark'], 'string'],
             [['jcunit', 'hezuofang'], 'string', 'max' => 255],
             [['ticheng'], 'string', 'max' => 2],
         ];
     }
-
+    public static function getArrayProject(){
+        return ArrayHelper::map(Projectmanage::find()->all(), 'id', 'projectname');
+    }
     /**
      * @inheritdoc
      */
@@ -77,6 +82,8 @@ class Finance extends \yii\db\ActiveRecord
             'ticheng' => Yii::t('app', '是否提成'),
             'remark' => Yii::t('app', '备注'),
             'username' => Yii::t('app', '操作人'),
+            'projectid' => Yii::t('app', '项目名称'),
+            'projectname' => Yii::t('app', '项目名称'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

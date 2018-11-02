@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\finance\Finance */
 
-$this->title = $model->id;
+$this->title = $model->projectname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '财务管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'projectname',
             [
               'attribute' => 'qddate',
               'format' => ['date', 'php:Y-m-d'],

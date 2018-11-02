@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\filemanage\Filemanage */
 
-$this->title = $model->id;
+$this->title = $model->projectname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '存档管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 if(isset(json_decode($model->file)->newname)){
@@ -45,6 +45,7 @@ if(isset(json_decode($model->piwen)->newname)){
         'model' => $model,
         'attributes' => [
             'id',
+            'projectname',
             [
               'attribute' => 'filedate',
               'format' => ['date', 'php:Y-m-d'],

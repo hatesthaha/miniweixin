@@ -4,7 +4,8 @@ namespace common\models\filemanage;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-
+use common\models\projectmanage\Projectmanage;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "filemanage".
  *
@@ -47,7 +48,9 @@ class Filemanage extends \yii\db\ActiveRecord
             [['file', 'piwen', 'writename', 'username'], 'string', 'max' => 255],
         ];
     }
-
+    public static function getArrayProject(){
+      return ArrayHelper::map(Projectmanage::find()->all(), 'id', 'projectname');
+    }
     /**
      * @inheritdoc
      */
@@ -61,6 +64,8 @@ class Filemanage extends \yii\db\ActiveRecord
             'writename' => Yii::t('app', '项目编写人'),
             'remark' => Yii::t('app', '备注'),
             'username' => Yii::t('app', '操作人'),
+            'projectid' => Yii::t('app', '项目名称'),
+            'projectname' => Yii::t('app', '项目名称'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

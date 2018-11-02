@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 use kartik\file\FileInput;
+use common\models\filemanage\Filemanage;
+use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\filemanage\Filemanage */
 /* @var $form yii\widgets\ActiveForm */
@@ -28,6 +30,22 @@ if(isset(json_decode($model->piwen)->newname)){
 <div class="filemanage-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+      <div class="col-md-12 ">
+        <?php
+          echo '<label class="control-label">项目名称</label>';
+          echo Select2::widget([
+            'name' => 'Filemanage[projectid]',
+            'data' => Filemanage::getArrayProject(),
+            'options' => [
+                'placeholder' => '请选择 ...',
+                'allowClear' => true
+            ],
+          ]);
+          ?>
+        
+      </div>
+    </div>
     <?= $form->field($model, 'filedate')->widget(
         DatePicker::className(), [
             // inline too, not bad

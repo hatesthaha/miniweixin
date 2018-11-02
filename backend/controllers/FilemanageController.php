@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use kartik\file\FileInput;//图片上传
 use yii\web\UploadedFile;
 use wanhunet\helpers\Utils;
-
+use common\models\projectmanage\Projectmanage;
 /**
  * FilemanageController implements the CRUD actions for Filemanage model.
  */
@@ -83,6 +83,8 @@ class FilemanageController extends BackendController
               $json = Utils::uploadfile($_FILES['Filemanage']['tmp_name']['piwen'],$_FILES['Filemanage']['name']['piwen'],$siteRoot);
               $model->piwen = $json;   		
           }
+          $projectid = Yii::$app->request->post()['Filemanage']['projectid'];
+          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
           if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
           }else{
@@ -131,6 +133,8 @@ class FilemanageController extends BackendController
             $newpiwen = $this->findModel($id);
             $model->piwen = $newpiwen->piwen;
           }
+          $projectid = Yii::$app->request->post()['Filemanage']['projectid'];
+          $model->projectname = Projectmanage::findONe(['id'=>$projectid])->projectname;
           if($model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
           }else{
