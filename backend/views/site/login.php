@@ -21,7 +21,8 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#" style="color:#fff"><b></b>新澜项目管理后台</a>
+    <a href="#" style="color:#fff;font-size: 24px;">保定市新澜环保技术咨询有限公司<br/></a>
+        <a href="#" style="color:#fff;font-size:24px"><b></b>项目管理后台</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

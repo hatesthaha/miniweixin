@@ -4,6 +4,8 @@ namespace common\models\projectmanage;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use common\models\finance\Finance;
+use common\models\filemanage\Filemanage;
 /**
  * This is the model class for table "projectmanage".
  *
@@ -85,5 +87,11 @@ class Projectmanage extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+    public function getFinance(){
+      return $this->hasOne(Finance::className(), ['projectid' => 'id']);
+    }
+    public function getFilemanage(){
+      return $this->hasOne(Filemanage::className(), ['projectid' => 'id']);
     }
 }

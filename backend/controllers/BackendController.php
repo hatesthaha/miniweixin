@@ -1,10 +1,12 @@
 <?php
 namespace backend\controllers;
 
+use Yii;
 use wanhunet\wanhunet;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
+use common\models\projectmanage\ProjectmanageSearch;
 
 
 class BackendController extends \yii\rest\Controller
@@ -37,6 +39,23 @@ class BackendController extends \yii\rest\Controller
     }
     //
     public function actionRoleactive(){
-        return $this->render('roleactive');
+      $yearmonthstart =yii::$app->request->get('yearmonthstart');
+      if(yii::$app->request->get('yearmonthstart')){
+        $yearmonthstart = strtotime(yii::$app->request->get('yearmonthstart').'-01');
+      }
+      $yearmonthend =yii::$app->request->get('yearmonthend');
+      if(yii::$app->request->get('yearmonthend')){
+        $yearmonthend = strtotime(yii::$app->request->get('yearmonthend').'-31');
+      }
+        
+        
+     
+        $searchModel = new ProjectmanageSearch();
+        $dataProvider = $searchModel->rolesearch(Yii::$app->request->queryParams,$yearmonthstart,$yearmonthend);
+
+        return $this->render('roleactive', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

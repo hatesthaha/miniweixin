@@ -26,7 +26,8 @@
         "maxwen/yii2-easy-wechat": "^1.0",
         "2amigos/yii2-file-upload-widget": "~1.0",
         "2amigos/yii2-date-picker-widget": "~1.0",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "kartik-v/yii2-date-range": "dev-master"
 
     },
     "require-dev": {

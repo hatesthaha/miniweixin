@@ -12,6 +12,9 @@ use common\models\projectmanage\Projectmanage;
  */
 class ProjectmanageSearch extends Projectmanage
 {
+    public $htmoney;
+    public $qddate;
+    public $writename;
     /**
      * @inheritdoc
      */
@@ -19,7 +22,7 @@ class ProjectmanageSearch extends Projectmanage
     {
         return [
             [['id', 'tkandate', 'bsdate', 'psdate', 'bpjfdate', 'created_at', 'updated_at'], 'integer'],
-            [['buildname', 'contactname', 'contactphone', 'projectarea', 'projectname', 'projecttype', 'approval', 'projectuser', 'projectin', 'approvalname', 'remark', 'jindu', 'username'], 'safe'],
+            [['buildname', 'contactname', 'contactphone', 'projectarea', 'projectname', 'projecttype', 'approval', 'projectuser', 'projectin', 'approvalname', 'remark', 'jindu', 'username','htmoney','qddate','writename'], 'safe'],
         ];
     }
 
@@ -33,6 +36,70 @@ class ProjectmanageSearch extends Projectmanage
     }
 
     /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function rolesearch($params,$yearmonthstart,$yearmonthend)
+    {
+
+        $query = Projectmanage::find();
+        $query->joinWith(['finance']);
+        $query->joinWith(['filemanage']);
+        $query->select("projectmanage.*,finance.htmoney,finance.qddate,filemanage.writename");
+        
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'finance.htmoney' => $this->htmoney,
+            'filemanage.writename' => $this->writename,
+            'tkandate' => $this->tkandate,
+            'bsdate' => $this->bsdate,
+            'psdate' => $this->psdate,
+            'bpjfdate' => $this->bpjfdate,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
+          if($yearmonthstart && $yearmonthend){
+            $query->andFilterWhere(['between','finance.qddate',$yearmonthstart,$yearmonthend]);
+          }
+        $query->andFilterWhere(['like', 'buildname', $this->buildname])
+            ->andFilterWhere(['like', 'contactname', $this->contactname])
+            ->andFilterWhere(['like', 'contactphone', $this->contactphone])
+            ->andFilterWhere(['like', 'projectarea', $this->projectarea])
+            ->andFilterWhere(['like', 'projectname', $this->projectname])
+            ->andFilterWhere(['like', 'projecttype', $this->projecttype])
+            ->andFilterWhere(['like', 'approval', $this->approval])
+            ->andFilterWhere(['like', 'projectuser', $this->projectuser])
+            ->andFilterWhere(['like', 'projectin', $this->projectin])
+            ->andFilterWhere(['like', 'approvalname', $this->approvalname])
+            ->andFilterWhere(['like', 'remark', $this->remark])
+            ->andFilterWhere(['like', 'jindu', $this->jindu])
+            ->andFilterWhere(['like', 'username', $this->username]);
+
+        return $dataProvider;
+    }
+
+        /**
      * Creates data provider instance with search query applied
      *
      * @param array $params
