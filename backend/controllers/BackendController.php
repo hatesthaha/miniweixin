@@ -41,11 +41,11 @@ class BackendController extends \yii\rest\Controller
     public function actionRoleactive(){
       $yearmonthstart =yii::$app->request->get('yearmonthstart');
       if(yii::$app->request->get('yearmonthstart')){
-        $yearmonthstart = strtotime(yii::$app->request->get('yearmonthstart').'-01');
+        $yearmonthstart = strtotime(yii::$app->request->get('yearmonthstart').' 00:00:00');
       }
       $yearmonthend =yii::$app->request->get('yearmonthend');
       if(yii::$app->request->get('yearmonthend')){
-        $yearmonthend = strtotime(yii::$app->request->get('yearmonthend').'-31');
+        $yearmonthend = strtotime(yii::$app->request->get('yearmonthend').' 23:59:59');
       }
         
         

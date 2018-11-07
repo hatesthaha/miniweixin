@@ -29,11 +29,12 @@ $this->title = '综合管理系统';
                     'template' => '{addon}{input}',
                     'language' => 'zh-CN',
                     'clientOptions' => [
-                        'startView' =>1,
-                        'maxViewMode' => 2,
-                        'minViewMode' =>1,
+                      'todayBtn' => 'linked',
+                        // 'startView' =>1,
+                        // 'maxViewMode' => 2,
+                        // 'minViewMode' =>1,
                         'autoclose' => true,
-                        'format' => 'yyyy-m',
+                        'format' => 'yyyy-mm-dd',
 
                     ]
                 ]);?>
@@ -45,11 +46,12 @@ $this->title = '综合管理系统';
                     'template' => '{addon}{input}',
                     'language' => 'zh-CN',
                     'clientOptions' => [
-                        'startView' =>1,
-                        'maxViewMode' => 2,
-                        'minViewMode' =>1,
+                      'todayBtn' => 'linked',
+                        // 'startView' =>1,
+                        // 'maxViewMode' => 2,
+                        // 'minViewMode' =>1,
                         'autoclose' => true,
-                        'format' => 'yyyy-m',
+                        'format' => 'yyyy-mm-dd',
 
                     ]
                 ]);?>
