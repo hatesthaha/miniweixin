@@ -116,8 +116,16 @@ $this->title = '综合管理系统';
             ],
      
             'projectuser',
-       
+            'jindu',
+            ['class' => 'kartik\grid\ActionColumn',
+                'header' => '操作',
+                'template' => '',
+                'headerOptions' => ['width' => '200'],
+                'buttons' => [
+                    
 
+                ],
+            ],
   
 
 

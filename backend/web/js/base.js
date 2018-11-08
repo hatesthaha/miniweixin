@@ -21,7 +21,7 @@ $(".table-striped").on("click","td",function(){
     }
 });
 //搜索栏
-// $('.filters').find('td:last').html('<span class="btn btn-primary" style="margin-left: 20px">搜索栏</span>');
+$('.myform').find('th:last').html('<span class="btn btn-primary" style="margin-left: 20px">搜索栏</span>');
 //启用
 var bindqiyong = function($url){
     $('#start').click(function(){
