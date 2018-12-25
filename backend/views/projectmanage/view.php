@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->projectname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '项目管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
@@ -44,19 +45,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'approvalname',
             [
               'attribute' => 'tkandate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->tkandate>1000?date('Y-m-d',$model->tkandate): '',
+             
             ],
             [
               'attribute' => 'bsdate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->bsdate>1000?date('Y-m-d',$model->bsdate): '',
             ],
             [
               'attribute' => 'psdate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->psdate>1000?date('Y-m-d',$model->psdate): '',
+              // 'format' => ['date', 'php:Y-m-d'],
             ],
             [
               'attribute' => 'bpjfdate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->bpjfdate>1000?date('Y-m-d',$model->bpjfdate): '',
+              // 'format' => ['date', 'php:Y-m-d'],
             ],
   
             'remark:ntext',

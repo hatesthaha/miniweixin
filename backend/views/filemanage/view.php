@@ -23,6 +23,7 @@ if(isset(json_decode($model->piwen)->newname)){
   $piwenoldimg = '空图片';
   $piwenimg = $model->piwen;
 }
+
 ?>
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
@@ -48,7 +49,7 @@ if(isset(json_decode($model->piwen)->newname)){
             'projectname',
             [
               'attribute' => 'filedate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->filedate>1000?date('Y-m-d',$model->filedate): '',
             ],
             [
               'attribute' => 'file',
@@ -66,11 +67,12 @@ if(isset(json_decode($model->piwen)->newname)){
             'username',
             [
               'attribute' => 'created_at',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->created_at>1000?date('Y-m-d',$model->created_at): '',
+              
             ],
             [
                 'attribute' => 'updated_at',
-                'format' => ['date', 'php:Y-m-d'],
+                'value'=> $model->updated_at>1000?date('Y-m-d',$model->updated_at): '',
             ],
         ],
     ]) ?>

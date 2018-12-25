@@ -34,19 +34,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'projectname',
             [
               'attribute' => 'qddate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->qddate>1000?date('Y-m-d',$model->qddate): '',
             ],
         
             'htmoney',
             [
               'attribute' => 'sdkdate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->sdkdate>1000?date('Y-m-d',$model->sdkdate): '',
+              
             ],
  
             'sfmoney',
             [
               'attribute' => 'wkdate',
-              'format' => ['date', 'php:Y-m-d'],
+              'value'=> $model->wkdate>1000?date('Y-m-d',$model->wkdate): '',
+         
             ],
 
             'wkmoney',
