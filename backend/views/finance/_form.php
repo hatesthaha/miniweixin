@@ -8,6 +8,9 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\finance\Finance */
 /* @var $form yii\widgets\ActiveForm */
+$model->qddate == '1970-01-01' ? $model->qddate ='':'';
+$model->sdkdate == '1970-01-01' ? $model->sdkdate ='':'';
+$model->wkdate == '1970-01-01' ? $model->wkdate ='':'';
 ?>
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
@@ -21,6 +24,7 @@ use kartik\select2\Select2;
           echo '<label class="control-label">项目名称</label>';
           echo Select2::widget([
             'name' => 'Finance[projectid]',
+            'value' => $model->projectid,
             'data' => Finance::getArrayProject(),
             'options' => [
                 'placeholder' => '请选择 ...',

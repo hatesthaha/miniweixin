@@ -23,6 +23,7 @@ if(isset(json_decode($model->piwen)->newname)){
   $piwenoldimg = '';
   $piwenimg = $model->piwen;
 }
+$model->filedate == '1970-01-01' ? $model->filedate ='':'';
 ?>
 <?php $this->beginBlock('siderbar'); ?>
 <?= $this->render('//layouts/project-menu') ?>
@@ -36,6 +37,7 @@ if(isset(json_decode($model->piwen)->newname)){
           echo '<label class="control-label">项目名称</label>';
           echo Select2::widget([
             'name' => 'Filemanage[projectid]',
+            'value' => $model->projectid,
             'data' => Filemanage::getArrayProject(),
             'options' => [
                 'placeholder' => '请选择 ...',
