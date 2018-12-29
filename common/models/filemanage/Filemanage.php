@@ -49,7 +49,14 @@ class Filemanage extends \yii\db\ActiveRecord
         ];
     }
     public static function getArrayProject(){
-      return ArrayHelper::map(Projectmanage::find()->all(), 'id', 'projectname');
+      $user = current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id));
+      if($user->name == 'admin'){
+        return ArrayHelper::map(Projectmanage::find()->all(), 'id', 'projectname');
+      }else{
+        $query = Projectmanage::find()->andWhere(['username'=>Yii::$app->user->identity->username])->all();
+        
+        return ArrayHelper::map($query, 'id', 'projectname');
+      }
     }
     /**
      * @inheritdoc
