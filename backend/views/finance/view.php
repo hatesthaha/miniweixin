@@ -36,27 +36,46 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute' => 'qddate',
               'value'=> $model->qddate>1000?date('Y-m-d',$model->qddate): '',
             ],
-        
-            'htmoney',
+            [
+              'attribute' => 'htmoney', 
+              'value'=> $model->htmoney?$model->htmoney: '',
+            ],
+    
             [
               'attribute' => 'sdkdate',
               'value'=> $model->sdkdate>1000?date('Y-m-d',$model->sdkdate): '',
               
             ],
- 
-            'sfmoney',
+            [
+              'attribute' => 'sfmoney', 
+              'value'=> $model->sfmoney?$model->sfmoney: '',
+            ],
+        
             [
               'attribute' => 'wkdate',
               'value'=> $model->wkdate>1000?date('Y-m-d',$model->wkdate): '',
          
             ],
-
-            'wkmoney',
+            [
+              'attribute' => 'wkmoney', 
+              'value'=> $model->wkmoney?$model->wkmoney: '',
+            ],
+       
             'jcunit',
-            'jcmoney',
+
+            [
+              'attribute' => 'jcmoney', 
+              'value'=> $model->jcmoney?$model->jcmoney: '',
+            ],
             'hezuofang',
-            'dixiasmoney',
-            'premoney',
+            [
+              'attribute' => 'dixiasmoney', 
+              'value'=> $model->dixiasmoney?$model->dixiasmoney: '',
+            ],
+            [
+              'attribute' => 'premoney', 
+              'value'=> $model->premoney?$model->premoney: '',
+            ],
             'ticheng',
             'remark:ntext',
             'username',
